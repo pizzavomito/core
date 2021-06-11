@@ -77,6 +77,7 @@ final class FilterEagerLoadingExtension implements ContextAwareQueryCollectionEx
             $replacementAlias = $queryNameGenerator->generateJoinAlias($originAlias);
             $in = $this->getQueryBuilderWithNewAliases($queryBuilder, $queryNameGenerator, $originAlias, $replacementAlias);
             $in->select($replacementAlias);
+            $in->distinct();
             $queryBuilderClone->andWhere($queryBuilderClone->expr()->in($originAlias, $in->getDQL()));
             $changedWhereClause = true;
         } else {
